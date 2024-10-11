@@ -38,7 +38,7 @@
             width: 100%;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 14;
         }
 
         .tab {
@@ -149,7 +149,7 @@
             <!-- HTML Editor -->
             <div style="width: 100%;" class="mb-10">
                 <h1 class="text-[20px]"
-                    style="text-align: center; border: 2px solid rgb(255, 119, 0); color: rgb(255, 119, 0);">HTML +
+                    style="text-align: center; position: sticky; top: 45px; background-color: #263238; z-index: 10; border: 2px solid rgb(255, 119, 0); color: rgb(255, 119, 0);">HTML +
                     <span class="text-blue-300">TailWindCss</span>
                 </h1>
                 <textarea id="htmlEditor" style="white-space: pre;">ADD YOUR IDEAS</textarea>
@@ -157,7 +157,7 @@
             </div>
             <!-- CSS Editor -->
             <div style="width: 100%;">
-                <h1 class="text-[20px]" style="text-align: center; border: 2px solid #95ecfd; color: #95ecfd;">CSS</h1>
+                <h1 class="text-[20px]" style="text-align: center; position: sticky; top: 45px; z-index: 12; background-color: #263238; border: 2px solid #95ecfd; color: #95ecfd;">CSS</h1>
                 <textarea id="cssEditor" style="white-space: pre;">/*Write your CSS here*/</textarea>
                 <button class="setButton" id="resetCSSButton">Reset CSS</button>
             </div>
