@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/dracula.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/one-dark.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/ayu.min.css">
+    <link rel="stylesheet" href="output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Consolas', 'Courier New', monospace;
@@ -29,11 +31,6 @@
             scrollbar-color: gray transparent;
         }
 
-        h2 {
-            color: #ffffff;
-            margin-bottom: 20px;
-        }
-
         .tabs {
             display: flex;
             margin-bottom: 10px;
@@ -46,7 +43,7 @@
 
         .tab {
             flex: 1;
-            padding: 10px 20px;
+            padding: 5px 20px;
             background-color: #3b3f45;
             border: 1px solid #3c3c3c;
             border-bottom: none;
@@ -104,10 +101,10 @@
             font-size: 12px;
         }
 
-        button {
+        .setButton {
             margin-top: 10px;
             padding: 8px 15px;
-            background-color: #007acc;
+            background-color: #424242;
             color: white;
             border: none;
             border-radius: 5px;
@@ -115,7 +112,7 @@
             transition: background-color 0.3s;
         }
 
-        button:hover {
+        .setButton:hover {
             background-color: #005a9c;
         }
 
@@ -140,43 +137,59 @@
 </head>
 
 <body>
-    <h2>HTML, CSS && JAVASCRIPT PAPER. Write your poem!</h2>
+    <h2 class="text-[30px]"> <span class="text-orange-400">HTML</span>, <span class="text-blue-400">CSS</span> & <span
+            class="text-yellow-300">JAVASCRIPT</span> PAPER. Write your poem! <span
+            class="text-blue-200">+TailWindCss</span></h2>
     <div class="tabs">
-        <div class="tab active" id="htmlCssTab">HTML & CSS</div>
-        <div class="tab" id="jsTab">JavaScript</div>
+        <div class="text-[20px] tab active" id="htmlCssTab">HTML & CSS</div>
+        <div class="text-[20px] tab" id="jsTab">JavaScript</div>
     </div>
     <div class="editors active" id="htmlCssEditors">
         <div style="display: flex; flex-wrap: wrap;">
             <!-- HTML Editor -->
-            <div style="width: 100%;">
-                <h1 style="text-align: center; border: 2px solid rgb(255, 81, 0); color: rgb(255, 81, 0);">HTML</h1>
-                <textarea id="htmlEditor" style="white-space: pre;"></textarea>
+            <div style="width: 100%;" class="mb-10">
+                <h1 class="text-[20px]"
+                    style="text-align: center; border: 2px solid rgb(255, 119, 0); color: rgb(255, 119, 0);">HTML +
+                    <span class="text-blue-300">TailWindCss</span>
+                </h1>
+                <textarea id="htmlEditor" style="white-space: pre;">ADD YOUR IDEAS</textarea>
+                <button class="setButton" id="resetHTMLButton">Reset HTML</button>
             </div>
             <!-- CSS Editor -->
             <div style="width: 100%;">
-                <h1 style="text-align: center; border: 2px solid #95ecfd; color: #95ecfd;">CSS</h1>
-                <textarea id="cssEditor" style="white-space: pre;"></textarea>
+                <h1 class="text-[20px]" style="text-align: center; border: 2px solid #95ecfd; color: #95ecfd;">CSS</h1>
+                <textarea id="cssEditor" style="white-space: pre;">/*Write your CSS here*/</textarea>
+                <button class="setButton" id="resetCSSButton">Reset CSS</button>
             </div>
         </div>
         <!-- Preview Area -->
         <h1 style="text-align: center; font-size: 40px;">Result</h1>
         <div>
             <div id="preview" class="output" style="font-family: none;">
-                <h1 style="text-shadow: 20px 20px 5px rgba(0, 0, 0, 0.5); font-size: 100px;">Hello World!</h1>
-                <p>This is editable HTML!</p>
+                <p class="text-red-600 font-sans">Add Html to see result! / добавьте что-то в html чтобы увидеть
+                    результат</p>
             </div>
             <!-- Reset Button -->
-            <button id="resetButton">Reset</button>
+            <button class="setButton" id="resetButton">Reset All Project</button>
+            <p class="text-red-500 mt-5">DO NOT USE JS BELOW FOR SCRIPTING HTML. <span class="text-green-100"> USE HTML
+                    TAG <span class="text-blue-300">‹script›‹/script›</span> IN HTML EDITOR!</span></p>
         </div>
     </div>
     <!-- JavaScript Editor -->
-    <h1 style="color: yellow; border: 2px solid ; width: 99%; text-align: center;">JAVASCRIPT</h1>
-    <textarea id="jsEditor" style="white-space: pre;"></textarea>
+    <h1 class="text-[20px]" style="color: yellow; border: 2px solid ; width: 99%; text-align: center;">JAVASCRIPT</h1>
+    <textarea id="jsEditor" style="white-space: pre;">
+// Write your JS here
+console.log('Hello developer')</textarea>
     <div class="editors" id="jsEditors">
+        <button class="setButton font-[700]" id="runButton" style="width: fit-content;">Run JS</button>
+        <button class="setButton font-[700]" id="runOrDisConsoleButton" style="width: fit-content;">Live Console <span
+            class="text-red-400 consoleIND">disabled</span></button>
+            <div id="jsError" class="error"></div>
         <!-- Console Output -->
-        <div id="jsError" class="error"></div>
-        <button id="runButton" style="width: fit-content;">Run JS</button>
-        <div id="console"></div>
+        <div id="console">
+            <p>Run your code to see result here</p>
+        </div>
+        <button class="setButton" id="resetConsoleButton">clean console</button>
         <!-- Run JavaScript Button -->
     </div>
     <div id="htmlError" style="display: none;" class="error"></div>
@@ -189,6 +202,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/addon/hint/show-hint.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/addon/hint/show-hint.min.css">
     <script>
+        let liveConsole = false;
         const htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), {
             lineNumbers: true,
             styleActiveLine: true,
@@ -234,6 +248,42 @@
                 }
             }
         });
+        function executeJavaScript() {
+            const jsValue = jsEditor.getValue();
+            const errorsDiv = document.getElementById('jsError');
+            errorsDiv.innerHTML = '';
+
+            if (jsValue.trim() === '') {
+                document.getElementById('console').innerHTML = '<p>Run your code to see result here</p>';
+                return;
+            }
+
+            try {
+                const consoleOutput = document.getElementById('console');
+                consoleOutput.innerHTML = '';
+                console.clear();
+                const originalLog = console.log;
+                console.log = function (message) {
+                    consoleOutput.innerHTML = message + '<br>';
+                    originalLog.apply(console, arguments);
+                };
+
+                eval(jsValue);
+            } catch (error) {
+                errorsDiv.innerHTML = error.message;
+            }
+        }
+        document.querySelector('#runOrDisConsoleButton').onclick = () => {
+            liveConsole = !liveConsole;
+            !liveConsole ? document.querySelector('.consoleIND').innerHTML = 'disabled' : document.querySelector('.consoleIND').innerHTML = 'active';
+            !liveConsole ? document.querySelector('.consoleIND').style.color = '#f55' : document.querySelector('.consoleIND').style.color = 'yellowgreen';
+        }
+        jsEditor.on('change', function () {
+            if (liveConsole) {
+                executeJavaScript();
+            }
+        });
+
         const preview = document.getElementById('preview');
         htmlEditor.on('change', function () {
             const htmlValue = htmlEditor.getValue();
@@ -288,11 +338,23 @@
         document.getElementById('resetButton').addEventListener('click', function () {
             htmlEditor.setValue('');
             cssEditor.setValue('');
-            jsEditor.setValue('');
-            preview.innerHTML = '<h1>Hello World!</h1><p>This is editable HTML!</p>';
+            preview.innerHTML = '<h1>YOUR HTML IS EMPTY</h1>';
             document.getElementById('htmlError').innerHTML = '';
             document.getElementById('cssError').innerHTML = '';
-            document.getElementById('jsError').innerHTML = '';
+            updateStatusBar();
+        });
+        document.getElementById('resetHTMLButton').addEventListener('click', function () {
+            htmlEditor.setValue('');
+            document.getElementById('htmlError').innerHTML = '';
+            preview.innerHTML = '<h1>YOUR HTML IS EMPTY</h1>';
+            updateStatusBar();
+        });
+        document.getElementById('resetCSSButton').addEventListener('click', function () {
+            cssEditor.setValue('');
+            document.getElementById('cssError').innerHTML = '';
+            updateStatusBar();
+        });
+        document.getElementById('resetConsoleButton').addEventListener('click', function () {
             document.getElementById('console').innerHTML = '';
             updateStatusBar();
         });
